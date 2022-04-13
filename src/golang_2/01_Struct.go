@@ -20,6 +20,10 @@ func (person Person) FmtBro() {
 	fmt.Println(person.bro)
 }
 
+func (person *Person) incre_age() {
+	person.age++
+}
+
 func Struct01() {
 	Hilda := Person{
 		name:   "Hilda",
@@ -37,4 +41,64 @@ func Struct01() {
 
 	fmt.Println(Hilda, quan)
 	quan.FmtBro()
+}
+
+/***************************************************/
+
+type company struct {
+	companyName string
+	companyAddr string
+}
+
+type staff struct {
+	name     string
+	age      int
+	gender   string
+	position string
+	company
+	// 注意！这个company没有任何修饰！
+}
+
+func Struct02() {
+	ByteDance := company{
+		companyName: "ByteDance",
+		companyAddr: "Shenzhen",
+	}
+
+	Hilda := staff{
+		name:     "Quan",
+		age:      22,
+		gender:   "man",
+		position: "Zhaoqing",
+		company:  ByteDance,
+	}
+
+	fmt.Println(Hilda)
+
+}
+
+func Struct03() {
+	// 1. 直接实例化
+	myCom := company{
+		companyName: "Tencent",
+		companyAddr: "shenzhen",
+	}
+	fmt.Println(myCom)
+
+	// 2. 使用new
+	myCom2 := new(company)
+	// 此时输出为0
+	fmt.Println(myCom2)
+
+	myCom2.companyName = "miHoyo"
+	myCom2.companyAddr = "shanghai"
+	fmt.Println(myCom2)
+
+	// 3. 使用&
+	var myCom3 *company = &company{}
+	fmt.Println(myCom3)
+
+	myCom3.companyName = "Microsoft"
+	myCom3.companyAddr = "suzhou"
+	fmt.Println(myCom3)
 }
