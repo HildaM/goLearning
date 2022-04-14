@@ -3,5 +3,5 @@ package main
 import "goLearning/src/golang_2"
 
 func main() {
-	golang_2.Hide()
+	golang_2.Make()
 }
