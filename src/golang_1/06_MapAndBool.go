@@ -1,6 +1,9 @@
 package golang_1
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func GetMap() {
 	// 1. 直接声明和初始化
@@ -35,4 +38,51 @@ func IsExist() {
 	} else {
 		fmt.Println("math 不存在")
 	}
+}
+
+func Map() {
+	mutilMap := make(map[int][]int) // 注意：make(map[int][]int, 100, 200) 会报错
+
+	// 添加元素
+	// 缔造一个题型数组
+	for i := 0; i < 10; i++ {
+		for j := 0; j <= i; j++ {
+			mutilMap[i] = append(mutilMap[i], j)
+		}
+	}
+
+	// 遍历
+	for idx, arr := range mutilMap {
+		fmt.Printf("第 %d 行：", idx)
+		fmt.Println(arr)
+	}
+}
+
+func SyncMap() {
+	var syncMap sync.Map
+
+	/*
+		sync.Map 需要使用Store函数存储
+		同时，Map没有限制存储的类型
+	*/
+	for i := 0; i < 10; i++ {
+		syncMap.Store(i, i*10)
+	}
+	syncMap.Store("a", "A")
+	syncMap.Store("b", "B")
+	syncMap.Store("c", "C")
+
+	// 获取指定的值
+	fmt.Println(syncMap.Load('a'))
+	fmt.Println(syncMap.Load(2))
+
+	// 删除指定值
+	syncMap.Delete('q')
+
+	// range遍历
+	syncMap.Range(func(k, v interface{}) bool {
+		fmt.Printf("k: %v, v: %v\n", k, v)
+		return true
+	})
+
 }

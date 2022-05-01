@@ -38,3 +38,29 @@ func SliceTest() {
 	fmt.Println(myslice)
 	fmt.Printf("myslice的第四个元素为: %d", myslice[3])
 }
+
+func Slice03() {
+	arr := [...]int{1, 2, 3, 4, 5, 6}
+	slice := arr[0:len(arr)]
+	fmt.Println(slice)
+}
+
+func Append01() {
+	arr := [...]int{1, 2, 3, 4, 5, 6}
+	arr2 := [...]int{8, 9, 10}
+
+	slice1 := arr[1:len(arr)]
+	fmt.Println(slice1)
+
+	slice1 = append(slice1, arr2[0:len(arr2)]...)
+	fmt.Println(slice1, arr)
+}
+
+func SliceCopy() {
+	destSli := []int{1, 3, 4, 5, 6, 3, 4, 5, 6, 6}
+	srcSli := []int{6, 43, 2, 4, 5}
+
+	//copy(destSli, srcSli)
+	copy(srcSli, destSli)
+	fmt.Println(srcSli)
+}
